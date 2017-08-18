@@ -1,4 +1,4 @@
 class NodoPila():
-    def _init_ (self, dato=None, siguiente=None):
+    def __init__ (self, dato=None, siguiente=None):
         self.dato = dato
         self.siguiente = siguiente

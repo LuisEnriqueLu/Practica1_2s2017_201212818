@@ -6,13 +6,13 @@ class Lista:
 		self.indiceLista = 0
 
 	def insertar(self, carnet, ip, estado, mascara):
-		if self.raiz == None :			
+		if self.raiz == None:			
 			nodo = NodoL(carnet, ip, estado, mascara, self.indiceLista)
 			self.raiz = nodo
 			self.indiceLista = self.indiceLista + 1
 		else :
 			aux = self.raiz
-			while aux.siguiente != None :
+			while aux.siguiente != None:
 				aux = aux.siguiente
 			nodo = NodoL(carnet, ip, estado, mascara, self.indiceLista)
 			self.indiceLista = self.indiceLista + 1
@@ -27,7 +27,7 @@ class Lista:
 		else :
 			while aux != None:
 				if aux.index != None:
-					dato += aux.carnet + " " + aux.ip + " " + aux.estado + ";"										
+					dato += aux.carnet + " " + aux.ip + " " + aux.estado + "; "										
 				aux = aux.siguiente
 			return str(dato) 
 			

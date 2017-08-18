@@ -5,41 +5,61 @@ from NodoCola import NodoCola
 from Pila import Pila
 from NodoPila import NodoPila
 from flask import Flask, request, Response
-app = Flask("Servidor")
 
 lista = Lista()
 cola = Cola()
 pilaSignos = Pila()
 pilaNumero = Pila()
 
-class Servidor():	
-	@app.route('/AgregarListaIPCarnet',methods=['POST']) 
+app = Flask("Servidor_Python")
+
+class Servidor():
+	
+	#Agregar a Lista Simple
+	@app.route('/AgregarIPCarnetListaSimple',methods=['POST']) 
 	def agregarLista():
+		listasimple = Lista()
 		carnet = str(request.form['carnet'])
 		ip = str(request.form['ip'])
 		estado = str(request.form['estado'])
-		mascara = str(request.form['mascara'])
-		lista.insertar(carnet, ip, estado, mascara)
-		return "DATO INGRESADO"
+		mascara = str(request.form['mascara'])		
+		listasimple.insertar(carnet, ip, estado, mascara)
+		return "Dato Insertado -> " + carnet + " " + ip 
 
-	@app.route("/consultar")
+
+	#Imprimir Lista Simple
+	@app.route("/consultarListaSimple")
 	def ConsultarLista():
 		respuesta = lista.consultar()
 		return respuesta
 
+
+	#Metodo Ip Conectado
 	@app.route("/conectado")
 	def metodoGet():
 		return "201212818"
 	
+	
+	#Metodo Respuesta
 	@app.route('/respuesta',methods=['POST']) 
 	def respuesta():
-		textoenviar = str(request.data)
-		textoenviar = str(request.data)
-		textoenviar = str(request.data)
+		inorden = str(request.form['inorden'])
+		postorden = str(request.form['postorden'])
+		resultado = str(request.form['resultado'])
 		ipRecup = str(request.environ['REMOTE_ADDR'])
+		#Enviar a Lista Doble
 		return "true"
 	
+	
+	#Metodo Mensaje en Cola
+	@app.route('/mensaje',methods=['POST']) 
+	def respuestaMensaje():
+		mensaje = str(request.form['inorden'])
+		ipRecup = str(request.environ['REMOTE_ADDR'])
+		cola.Encolar(mensaje);	
+		return "true"	
 
+	#Operar Expresion en Pila
 	@app.route('/operarExpresion',methods=['POST'])
 	def ResolverExpresion():
 		cadena = str(request.form['inorden'])
@@ -77,16 +97,8 @@ class Servidor():
 		pilaNumero.agregarPila(valor)        
 		respuesta = pilaNumero.sacarPila()
 		r = str(respuesta)			
-		return cadena
-
-
-	@app.route('/mensaje',methods=['POST']) 
-	def respuestaMensaje():
-		mensaje = str(request.form['inorden'])
-		ipRecup = str(request.environ['REMOTE_ADDR'])
-		cola.Encolar(mensaje);	
-		return "true"	
+		return r	
 	
-
+	
 	if __name__ == "__main__":
-		app.run(debug=True, host='192.168.0.30')
+		app.run(debug=True, host='192.168.0.6')
