@@ -19,6 +19,7 @@ namespace Practica1
         string resultado = "";
         string iorden = "";
         string postorden = "";
+        string textoImprimir = "";
         public ColaMensajes()
         {
             InitializeComponent();
@@ -26,9 +27,11 @@ namespace Practica1
             if (lbOp.Text == "Operaciones en Cola: 0")
             {
                 btnOperar.Enabled = false;
+                Globales.contador = 0;
             }else
             {
                 btnOperar.Enabled = true;
+                Globales.contador = 1;
             }            
         }
 
@@ -45,7 +48,7 @@ namespace Practica1
 
         private void lblSalir_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Dispose();
         }
 
         private void btnOperar_Click(object sender, EventArgs e)
@@ -66,7 +69,7 @@ namespace Practica1
                     var variablesEnviar = new NameValueCollection();
                     variablesEnviar["inorden"] = variable;
 
-                    var respuestaMetodo = cliente.UploadValues("http://127.0.0.1:5000/operarExpresion", variablesEnviar);
+                    var respuestaMetodo = cliente.UploadValues("http://" + Globales.ipCambiar + ":5000/operarExpresion", variablesEnviar);
                     var respuestaConvertidaString = Encoding.Default.GetString(respuestaMetodo);
                     Console.WriteLine(respuestaConvertidaString);
                 }
@@ -85,21 +88,24 @@ namespace Practica1
                 {
                     using (var cliente = new WebClient())
                     {
-                        var respuestaConvertidaString = cliente.DownloadString("http://127.0.0.1:5000/ContarCola");
+                        var respuestaConvertidaString = cliente.DownloadString("http://" + Globales.ipCambiar + ":5000/ContarCola");
                         Console.WriteLine("Mensajes en Cola " + respuestaConvertidaString);
                         lbOp.Text = "Operaciones en Cola: " + respuestaConvertidaString;
+                        Globales.contador = 1;
                     }
                 }
                 else
                 {
                     lbOp.Text = "Operaciones en Cola: 0";
                     btnOperar.Enabled = false;
+                    Globales.contador = 0;
                 }
             }
             catch (Exception e)
             {
                 lbOp.Text = "Operaciones en Cola: 0";
                 btnOperar.Enabled = false;
+                Globales.contador = 0;
                 Console.WriteLine(e);
             }
         }
@@ -110,7 +116,7 @@ namespace Practica1
             {
                 using (var cliente = new WebClient())
                 {
-                    var respuestaConvertidaString = cliente.DownloadString("http://127.0.0.1:5000/operarExpresion");
+                    var respuestaConvertidaString = cliente.DownloadString("http://" + Globales.ipCambiar + ":5000/operarExpresion");
                     Console.WriteLine("Respuesta: " + respuestaConvertidaString);
                     
                     string[] variables = respuestaConvertidaString.Split(';');
@@ -118,7 +124,8 @@ namespace Practica1
                     resultado = variables[0].ToString();
                     ip = variables[1].ToString();
                     iorden = variables[2].ToString();
-                    postorden = variables[2].ToString();
+                    postorden = variables[3].ToString();
+                    textoImprimir = variables[4].ToString();
 
                     foreach (var nodo in Dashboard.ListaSimple) 
                     {
@@ -133,6 +140,7 @@ namespace Practica1
                     txtPostorden.Text = postorden;
                     txtIp.Text = ip;
                     txtOperacion.Text = resultado;
+                    txtArea.Text = textoImprimir;
                 }
             }
             catch (Exception e)
@@ -152,7 +160,7 @@ namespace Practica1
                     variablesEnviar["postorden"] = postorden;
                     variablesEnviar["resultado"] = resultado;
 
-                    var respuestaMetodo = cliente.UploadValues("http://127.0.0.1:5000/respuesta", variablesEnviar);
+                    var respuestaMetodo = cliente.UploadValues("http://" + ip + ":5000/respuesta", variablesEnviar);
                     var respuestaConvertidaString = Encoding.Default.GetString(respuestaMetodo);
                     Console.WriteLine(respuestaConvertidaString);
                 }

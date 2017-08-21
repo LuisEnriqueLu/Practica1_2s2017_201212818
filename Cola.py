@@ -1,4 +1,5 @@
 from NodoCola import NodoCola
+import os
 
 class Cola:
          
@@ -31,7 +32,8 @@ class Cola:
         if self.inicio != None:
             temp = self.inicio
             self.inicio = temp.siguiente
-            return temp.mensaje + ";" + temp.ip   
+            return temp.mensaje + ";" + temp.ip
+    
     
     def mostrarCola(self):
         datoCola = ""
@@ -55,13 +57,19 @@ class Cola:
             return "0" 
     
     
+    def crearArchivo(self):
+        archivo=open('C:\\Users\\l_enr\\Desktop\\graficaCola.txt','w')
+        archivo.close()    
+    
     def GraficarCola(self):
         dato = ""
         cont1 = 0
+        archivo=open('C:\\Users\\l_enr\\Desktop\\graficaCola.txt','a')
+        archivo.write('digraph G{\n')        
         if self.inicio != None:
             temp = self.inicio
             while temp!=None:
-                dato += "\""+str(temp.ip) + "_nodo_" + str(cont1)+ "\"" + " [label=\""+str(temp.ip)+ "\n" +str(temp.mensaje)+"\"];\n"
+                archivo.write("\""+str(temp.ip) + "_nodo_" + str(cont1)+ "\"" + " [label=\""+str(temp.ip)+ "\n" +str(temp.mensaje)+"\"];\n")
                 cont1=cont1+1
                 temp = temp.siguiente
             cont1 = 0
@@ -69,8 +77,10 @@ class Cola:
             temp = self.inicio               
             while temp != None:
                 if temp.siguiente!=None:
-                    dato += "\""+str(temp.ip)+"_nodo_"+str(cont1)+"\""+"->"+ "\"" + str(temp.siguiente.ip)+"_nodo_"+str(cont2)+"\""+";\n"
+                    archivo.write("\""+str(temp.ip)+"_nodo_"+str(cont1)+"\""+"->"+ "\"" + str(temp.siguiente.ip)+"_nodo_"+str(cont2)+"\""+";\n")
                     cont1=cont1+1
                     cont2=cont2+1                    
-                temp = temp.siguiente        
+                temp = temp.siguiente
+            archivo.write('}')
+            archivo.close()                
             return str(dato)

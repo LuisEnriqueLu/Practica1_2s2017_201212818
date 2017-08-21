@@ -40,13 +40,13 @@ namespace Practica1
         private void btnEnviar_Click(object sender, EventArgs e)
         {
             EnviarMensajes verForm = new EnviarMensajes();
-            verForm.Show();
+            verForm.ShowDialog();
         }
         
         private void btnCola_Click(object sender, EventArgs e)
         {
             ColaMensajes verPanel = new ColaMensajes();
-            verPanel.Show();            
+            verPanel.ShowDialog();            
         }
 
         private void btnRespuestas_Click(object sender, EventArgs e)

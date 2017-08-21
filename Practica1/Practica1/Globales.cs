@@ -9,5 +9,6 @@ namespace Practica1
     class Globales
     {
         public static string ipCambiar;
+        public static int contador;
     }
 }

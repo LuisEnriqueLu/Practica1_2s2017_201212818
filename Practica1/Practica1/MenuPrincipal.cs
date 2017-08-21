@@ -42,13 +42,13 @@ namespace Practica1
         private void btnAdmin_Click(object sender, EventArgs e)
         {
             AdminMensajes verpanel = new AdminMensajes();
-            verpanel.Show();
+            verpanel.ShowDialog();
         }
 
         private void btnReportes_Click(object sender, EventArgs e)
         {
             Reportes verPanel = new Reportes();
-            verPanel.Show();
+            verPanel.ShowDialog();
         }
     }
 }

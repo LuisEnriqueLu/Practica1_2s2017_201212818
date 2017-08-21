@@ -56,7 +56,7 @@ namespace Practica1
             {
                 using (var cliente = new WebClient())
                 {
-                    var respuestaConvertidaString = cliente.DownloadString("http://127.0.0.1:5000/consultarListaDoble");
+                    var respuestaConvertidaString = cliente.DownloadString("http://" + Globales.ipCambiar + ":5000/consultarListaDoble");
                     Console.WriteLine(respuestaConvertidaString);
 
                     string[] variablesCadena = respuestaConvertidaString.Split(';');
@@ -99,7 +99,7 @@ namespace Practica1
             {
                 using (var cliente = new WebClient())
                 {
-                    var respuestaConvertidaString = cliente.DownloadString("http://127.0.0.1:5000/consultarListaDoble");
+                    var respuestaConvertidaString = cliente.DownloadString("http://" + Globales.ipCambiar + ":5000/consultarListaDoble");
                     Console.WriteLine(respuestaConvertidaString);
 
                     string[] variablesCadena = respuestaConvertidaString.Split(';');
@@ -153,7 +153,7 @@ namespace Practica1
             {
                 using (var cliente = new WebClient())
                 {
-                    var respuestaConvertidaString = cliente.DownloadString("http://127.0.0.1:5000/consultarListaSimple");
+                    var respuestaConvertidaString = cliente.DownloadString("http://" + Globales.ipCambiar + ":5000/consultarListaSimple");
                     Console.WriteLine(respuestaConvertidaString);
                 }
             }

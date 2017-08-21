@@ -38,7 +38,6 @@
             this.btnOperar = new ns1.BunifuThinButton2();
             this.label3 = new System.Windows.Forms.Label();
             this.gbMensajes = new System.Windows.Forms.GroupBox();
-            this.ltvOperaciones = new System.Windows.Forms.ListBox();
             this.txtPostorden = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.txtInorden = new System.Windows.Forms.TextBox();
@@ -48,6 +47,7 @@
             this.txtIp = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtCarnet = new System.Windows.Forms.TextBox();
+            this.txtArea = new System.Windows.Forms.RichTextBox();
             this.panel2.SuspendLayout();
             this.gbMensajes.SuspendLayout();
             this.SuspendLayout();
@@ -167,7 +167,7 @@
             // 
             // gbMensajes
             // 
-            this.gbMensajes.Controls.Add(this.ltvOperaciones);
+            this.gbMensajes.Controls.Add(this.txtArea);
             this.gbMensajes.Controls.Add(this.txtPostorden);
             this.gbMensajes.Controls.Add(this.label7);
             this.gbMensajes.Controls.Add(this.txtInorden);
@@ -186,17 +186,6 @@
             this.gbMensajes.TabIndex = 15;
             this.gbMensajes.TabStop = false;
             this.gbMensajes.Text = "-Mensajes";
-            // 
-            // ltvOperaciones
-            // 
-            this.ltvOperaciones.Enabled = false;
-            this.ltvOperaciones.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ltvOperaciones.FormattingEnabled = true;
-            this.ltvOperaciones.ItemHeight = 25;
-            this.ltvOperaciones.Location = new System.Drawing.Point(514, 46);
-            this.ltvOperaciones.Name = "ltvOperaciones";
-            this.ltvOperaciones.Size = new System.Drawing.Size(452, 479);
-            this.ltvOperaciones.TabIndex = 24;
             // 
             // txtPostorden
             // 
@@ -291,6 +280,14 @@
             this.txtCarnet.Size = new System.Drawing.Size(265, 30);
             this.txtCarnet.TabIndex = 15;
             // 
+            // txtArea
+            // 
+            this.txtArea.Location = new System.Drawing.Point(498, 42);
+            this.txtArea.Name = "txtArea";
+            this.txtArea.Size = new System.Drawing.Size(475, 483);
+            this.txtArea.TabIndex = 24;
+            this.txtArea.Text = "";
+            // 
             // ColaMensajes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -336,6 +333,6 @@
         private System.Windows.Forms.TextBox txtIp;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtCarnet;
-        private System.Windows.Forms.ListBox ltvOperaciones;
+        private System.Windows.Forms.RichTextBox txtArea;
     }
 }

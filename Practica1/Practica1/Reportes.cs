@@ -26,7 +26,7 @@ namespace Practica1
 
         private void lblSalir_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Dispose();
         }
 
         private void panel2_MouseDown(object sender, MouseEventArgs e)
@@ -40,15 +40,15 @@ namespace Practica1
                
         }
 
-        private static void GenerateGraph(string cadena)
+        private void GenerateGraph()
         {
-            string variable = "digraph G { " + cadena + "}"; 
-            var fileName = "C:\\Users\\l_enr\\Desktop\\grafica.txt";
-            SaveToFile(variable, fileName); 
+            //string variable = "digraph G { " + cadena + "}"; 
+            //var fileName = "C:\\Users\\l_enr\\Desktop\\graficaCola.txt";
+            //SaveToFile(variable, fileName); 
 
             try
             {
-                var procStartInfo = new System.Diagnostics.ProcessStartInfo("cmd", "/C dot -Tjpg C:\\Users\\l_enr\\Desktop\\grafica.txt -o C:\\Users\\l_enr\\Desktop\\grafica.jpg");
+                var procStartInfo = new System.Diagnostics.ProcessStartInfo("cmd", "/C dot -Tjpg C:\\Users\\l_enr\\Desktop\\graficaCola.txt -o C:\\Users\\l_enr\\Desktop\\graficaCola.jpg");
                 var proc = new System.Diagnostics.Process();
                 proc.StartInfo = procStartInfo;
                 proc.Start();
@@ -59,8 +59,8 @@ namespace Practica1
                 Console.WriteLine(x.ToString());
             }
         }
-
-        private static void SaveToFile(string variable, string fileName)
+        
+        private void SaveToFile(string variable, string fileName)
         {
             TextWriter tw = new StreamWriter(fileName);
             tw.WriteLine(variable);
@@ -69,8 +69,13 @@ namespace Practica1
 
         private void btnGraficarCola_Click(object sender, EventArgs e)
         {
-            GenerateGraph(GraficarCola());
+            /*
+            string variable = "digraph G { hola }"; 
+            var fileName = "C:\\Users\\l_enr\\Desktop\\graficaCola.txt";
+            SaveToFile(variable, fileName); */
+            GraficarCola();            
         }
+                    
 
         public string GraficarCola()
         {
@@ -78,7 +83,7 @@ namespace Practica1
             {
                 using (var cliente = new WebClient())
                 {
-                    var respuestaConvertidaString = cliente.DownloadString("http://127.0.0.1:5000/GraficarCola");
+                    var respuestaConvertidaString = cliente.DownloadString("http://"+ Globales.ipCambiar +":5000/GraficarCola");
                     Console.WriteLine(respuestaConvertidaString);
                     return respuestaConvertidaString.ToString();
                 }
@@ -92,7 +97,15 @@ namespace Practica1
 
         private void btnMostrar_Click(object sender, EventArgs e)
         {
-            ptbImagen.Image = Image.FromFile(@"C:\Users\l_enr\Desktop\grafica.jpg");
+            if (Globales.contador != 0)
+            {
+                GenerateGraph();
+                ptbImagen.Image = Image.FromFile(@"C:\Users\l_enr\Desktop\graficaCola.jpg");
+            }
+            else 
+            {
+                ptbImagen.Image = null;
+            }
         }
     }
 }

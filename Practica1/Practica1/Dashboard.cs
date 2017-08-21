@@ -46,7 +46,7 @@ namespace Practica1
             abrirArchivoJSON();
             EnviarDatosListaSimple();
             ConsultarListaSimple();
-            //CambiarIpComputadora(Globales.ipCambiar, "255.0.0.0");
+            CambiarIpComputadora(Globales.ipCambiar, "255.0.0.0");
             timer1.Start();
         }
 
@@ -129,7 +129,7 @@ namespace Practica1
                             variablesEnviar["estado"] = "No";
                         }
 
-                        var respuestaMetodo = cliente.UploadValues("http://127.0.0.1:5000/AgregarIPCarnetListaSimple", variablesEnviar);
+                        var respuestaMetodo = cliente.UploadValues("http://" + Globales.ipCambiar + ":5000/AgregarIPCarnetListaSimple", variablesEnviar);
                         var respuestaConvertidaString = Encoding.Default.GetString(respuestaMetodo);
                         Console.WriteLine(respuestaConvertidaString);
                     }
@@ -162,7 +162,7 @@ namespace Practica1
                             variablesEnviar["estado"] = "No";
                         }
 
-                        var respuestaMetodo = cliente.UploadValues("http://127.0.0.1:5000/ActualizarCarnetListaSimple", variablesEnviar);
+                        var respuestaMetodo = cliente.UploadValues("http://" + Globales.ipCambiar + ":5000/ActualizarCarnetListaSimple", variablesEnviar);
                         var respuestaConvertidaString = Encoding.Default.GetString(respuestaMetodo);
                         Console.WriteLine(respuestaConvertidaString);
                     }
@@ -181,7 +181,7 @@ namespace Practica1
             {
                 using (var cliente = new WebClient())
                 {
-                    var respuestaConvertidaString = cliente.DownloadString("http://127.0.0.1:5000/conectado");
+                    var respuestaConvertidaString = cliente.DownloadString("http://" + Globales.ipCambiar + ":5000/conectado");
                     Console.WriteLine("Carnet Conectado: " + respuestaConvertidaString);
                     return respuestaConvertidaString;
                 }
@@ -199,7 +199,7 @@ namespace Practica1
             {
                 using (var cliente = new WebClient())
                 {
-                    var respuestaConvertidaString = cliente.DownloadString("http://127.0.0.1:5000/consultarListaSimple");
+                    var respuestaConvertidaString = cliente.DownloadString("http://" + Globales.ipCambiar + ":5000/consultarListaSimple");
                     Console.WriteLine(respuestaConvertidaString);                    
                 }
             }

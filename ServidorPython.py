@@ -96,12 +96,13 @@ class Servidor():
 	#Graficar Cola
 	@app.route("/GraficarCola")
 	def GraficarCola():
+		cola.crearArchivo()
 		respuesta = cola.GraficarCola()
 		return respuesta	
 	
 
 	#Operar Expresion en Pila
-	@app.route('/operarExpresion')
+	@app.route('/operar')
 	def ResolverExpresion():
 		todaCadena = str(cola.Desencolar())
 		cadena,ip = todaCadena.split(";") 
@@ -141,7 +142,7 @@ class Servidor():
 		r = str(respuesta) + ";" + ip + ";" + cadena			
 		return r	
 	
-	@app.route('/operar', methods = ['GET'])
+	@app.route('/operarExpresion')
 	def operar():
 		pilaNumero = Pila()
 		pilaOperador = Pila()
@@ -149,81 +150,70 @@ class Servidor():
 		postorden = ""
 		numero = ""
 		colaEjecucion = ""
-		#nodo = cola.Desencolar()
-		#print (nodo)
+		todaCadena = str(cola.Desencolar())
+		nodo,ip = todaCadena.split(";") 		
 		if nodo != None:
-			#operacion = nodo["mensaje"]
-			operacion = str(request.form['inorden'])
-			#ipRecup = nodo["ip"]
-			ipRecup = str(request.environ['REMOTE_ADDR'])
+			operacion = nodo			
 			for x in str(operacion):
 				print (x)
 				if x in (' ', '('):
 					print ("")
 				elif x == ")": 
 					if numero != "":
-						pilaNumero.push(numero)
+						pilaNumero.agregarPila(numero)
 						colaEjecucion += "push(" + numero +")\n"
 						postorden = postorden  + numero + " "
 						numero=""
 	
-					var1 = pilaNumero.pop()
-					var2 = pilaNumero.pop()
-					op = pilaOperador.pop()
+					var1 = pilaNumero.sacarPila()
+					var2 = pilaNumero.sacarPila()
+					op = pilaOperador.sacarPila()
 					colaEjecucion += "pop()\npop()\n"
 					postorden = postorden + str(op) + " "                          
 					if op == "+":
 						var3 = int(var1) + int(var2)
-						pilaNumero.push(var3)
+						pilaNumero.agregarPila(var3)
 						colaEjecucion += str(var1)+"+"+str(var2) + "=" + str(var3) + "\n"
 						colaEjecucion += "push(" + str(var3) +")\n"
 						#print var3
 					elif op == "-":
 						var3 = int(var2) - int(var1)
-						pilaNumero.push(var3)
+						pilaNumero.agregarPila(var3)
 						colaEjecucion += str(var2)+"-"+str(var1) + "=" + str(var3) + "\n"
 						colaEjecucion += "push(" + str(var3) +")\n"
 						#print var3
 					elif op == "*":
 						var3 = int(var1) * int(var2)
-						pilaNumero.push(var3)
+						pilaNumero.agregarPila(var3)
 						colaEjecucion += str(var1)+"*"+str(var2) + "=" + str(var3) + "\n"
 						colaEjecucion += "push(" + str(var3) +")\n"
 						#print var3
 					elif op == "/":
 						var3 = int(var2) / int(var1)               
-						pilaNumero.push(var3)
+						pilaNumero.agregarPila(var3)
 						colaEjecucion += str(var2)+"/"+str(var1) + "=" + str(var3) + "\n"
 						colaEjecucion += "push(" + str(var3) +")\n"
 						#print var3
 	
 				elif x  in ('/', '*', '-', '+'):
-					pilaOperador.push(x)                
+					pilaOperador.agregarPila(x)                
 					if numero != "" :
 						postorden = postorden  + numero + " "
-						pilaNumero.push(numero)
+						pilaNumero.agregarPila(numero)
 						colaEjecucion += "push(" + numero +")\n"
 						numero=""
 				else:
-					#pilaNumero.push(x)
-					numero = numero + x                
-					#postorden = postorden + " " + str(x) 
+					numero = numero + x                					
 	
-			resultado = pilaNumero.pop()
-			nodo = {'resultado': resultado ,'postorden': postorden , 'inorden' : operacion , 'carnet':'201212919'}
-			#return "true de prueba" + str(resultado)+ "POST"+ str(postorden)
-			try:
-				#r = requests.post("http://"+ipRecup+":5000/respuesta", data = nodo)
-				#r = requests.post("http://192.168.1.5:5000/respuesta", data = nodo)
-				#if r.status_code == 200:
-				respuestaLocal = {'resultado': resultado ,'postorden': postorden , 'inorden' : operacion ,'ipRecup': ipRecup , 'enviado' : "true" , 'colaEjecucion': colaEjecucion}
-				return json.dumps(respuestaLocal, default = jsonDefault)
+			resultado = pilaNumero.sacarPila()
+			try:				
+				r = str(resultado) + ";" + ip + ";" + nodo + ";" + postorden + ";" + colaEjecucion 
+				return r
 			except requests.exceptions.RequestException as e : 
 				print (e)    
-				return "No se pudo enviar el resultado"            
+				return "Error"            
 		else:
-			return "la cola esta vacia"
-	
+			return "Ya no hay Datos"
 	
 	
 	

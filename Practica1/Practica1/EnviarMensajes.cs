@@ -84,7 +84,7 @@ namespace Practica1
             {
                 using (var cliente = new WebClient())
                 {
-                    var respuestaConvertidaString = cliente.DownloadString("http://127.0.0.1:5000/consultarCola");
+                    var respuestaConvertidaString = cliente.DownloadString("http://" + Globales.ipCambiar + ":5000/consultarCola");
                     Console.WriteLine(respuestaConvertidaString);
                 }
             }
