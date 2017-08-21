@@ -2,25 +2,29 @@
 	<mensaje>
 		<nodos>
 			<IP>
-				192.168.0.14
-			</IP>
+				127.0.0.1
+			</IP>			
+		</nodos>
+		<texto>
+			(2+3)
+		</texto>
+	</mensaje>
+	<mensaje>
+		<nodos>
 			<IP>
-				192.168.0.30
-			</IP>
-			<IP>
-				192.168.0.29
+				127.0.0.1
 			</IP>
 		</nodos>
 		<texto>
-			((2 + 8) * 7 + (7 / (6 / 1))
+			(5+5)
 		</texto>
 	</mensaje>
 	<mensaje>
 		<IP>
-			192.168.0.30
+			127.0.0.1
 		</IP>
 		<texto>
-			(2 + 2)
+			(8 + 2)
 		</texto>
 	</mensaje>	
 </mensajes>

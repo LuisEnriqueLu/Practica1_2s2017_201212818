@@ -34,7 +34,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblMinimizar = new System.Windows.Forms.Label();
             this.lblSalir = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lbOp = new System.Windows.Forms.Label();
             this.btnOperar = new ns1.BunifuThinButton2();
             this.label3 = new System.Windows.Forms.Label();
             this.gbMensajes = new System.Windows.Forms.GroupBox();
@@ -115,17 +115,17 @@
             this.lblSalir.Text = "x";
             this.lblSalir.Click += new System.EventHandler(this.lblSalir_Click);
             // 
-            // label2
+            // lbOp
             // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(405, 68);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(253, 25);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "Operaciones en Cola: 10";
+            this.lbOp.AutoSize = true;
+            this.lbOp.BackColor = System.Drawing.Color.Transparent;
+            this.lbOp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbOp.ForeColor = System.Drawing.Color.White;
+            this.lbOp.Location = new System.Drawing.Point(405, 68);
+            this.lbOp.Name = "lbOp";
+            this.lbOp.Size = new System.Drawing.Size(229, 25);
+            this.lbOp.TabIndex = 12;
+            this.lbOp.Text = "Operaciones en Cola: ";
             // 
             // btnOperar
             // 
@@ -151,6 +151,7 @@
             this.btnOperar.Size = new System.Drawing.Size(200, 60);
             this.btnOperar.TabIndex = 13;
             this.btnOperar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnOperar.Click += new System.EventHandler(this.btnOperar_Click);
             // 
             // label3
             // 
@@ -299,7 +300,7 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.gbMensajes);
             this.Controls.Add(this.btnOperar);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lbOp);
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -322,7 +323,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblMinimizar;
         private System.Windows.Forms.Label lblSalir;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lbOp;
         private ns1.BunifuThinButton2 btnOperar;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox gbMensajes;

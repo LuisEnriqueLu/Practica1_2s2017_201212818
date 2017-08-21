@@ -36,19 +36,19 @@ namespace Practica1
         private void btnDash_Click(object sender, EventArgs e)
         {
             Dashboard verpanel = new Dashboard();
-            verpanel.ShowDialog();
+            verpanel.Show();
         }
 
         private void btnAdmin_Click(object sender, EventArgs e)
         {
             AdminMensajes verpanel = new AdminMensajes();
-            verpanel.ShowDialog();
+            verpanel.Show();
         }
 
         private void btnReportes_Click(object sender, EventArgs e)
         {
             Reportes verPanel = new Reportes();
-            verPanel.ShowDialog();
+            verPanel.Show();
         }
     }
 }

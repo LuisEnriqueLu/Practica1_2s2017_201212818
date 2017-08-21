@@ -29,13 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.ptbDetener = new System.Windows.Forms.PictureBox();
+            this.ptbIniciar = new System.Windows.Forms.PictureBox();
             this.lblNodo = new System.Windows.Forms.Label();
             this.dgvNodos = new System.Windows.Forms.DataGridView();
             this.Nodo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,6 +54,8 @@
             this.opd = new System.Windows.Forms.OpenFileDialog();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbDetener)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbIniciar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNodos)).BeginInit();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -59,6 +63,8 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(53)))), ((int)(((byte)(65)))));
+            this.panel1.Controls.Add(this.ptbDetener);
+            this.panel1.Controls.Add(this.ptbIniciar);
             this.panel1.Controls.Add(this.lblNodo);
             this.panel1.Controls.Add(this.dgvNodos);
             this.panel1.Controls.Add(this.btnCargar);
@@ -70,12 +76,36 @@
             this.panel1.Size = new System.Drawing.Size(1075, 632);
             this.panel1.TabIndex = 1;
             // 
+            // ptbDetener
+            // 
+            this.ptbDetener.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ptbDetener.BackgroundImage")));
+            this.ptbDetener.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.ptbDetener.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ptbDetener.Location = new System.Drawing.Point(831, 465);
+            this.ptbDetener.Name = "ptbDetener";
+            this.ptbDetener.Size = new System.Drawing.Size(74, 61);
+            this.ptbDetener.TabIndex = 12;
+            this.ptbDetener.TabStop = false;
+            this.ptbDetener.Click += new System.EventHandler(this.ptbDetener_Click);
+            // 
+            // ptbIniciar
+            // 
+            this.ptbIniciar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ptbIniciar.BackgroundImage")));
+            this.ptbIniciar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.ptbIniciar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ptbIniciar.Location = new System.Drawing.Point(911, 465);
+            this.ptbIniciar.Name = "ptbIniciar";
+            this.ptbIniciar.Size = new System.Drawing.Size(72, 61);
+            this.ptbIniciar.TabIndex = 11;
+            this.ptbIniciar.TabStop = false;
+            this.ptbIniciar.Click += new System.EventHandler(this.ptbIniciar_Click);
+            // 
             // lblNodo
             // 
             this.lblNodo.AutoSize = true;
             this.lblNodo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNodo.ForeColor = System.Drawing.Color.White;
-            this.lblNodo.Location = new System.Drawing.Point(120, 484);
+            this.lblNodo.Location = new System.Drawing.Point(105, 484);
             this.lblNodo.Name = "lblNodo";
             this.lblNodo.Size = new System.Drawing.Size(125, 25);
             this.lblNodo.TabIndex = 10;
@@ -124,7 +154,7 @@
             this.dgvNodos.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvNodos.EnableHeadersVisualStyles = false;
             this.dgvNodos.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.dgvNodos.Location = new System.Drawing.Point(110, 87);
+            this.dgvNodos.Location = new System.Drawing.Point(89, 87);
             this.dgvNodos.Margin = new System.Windows.Forms.Padding(5);
             this.dgvNodos.Name = "dgvNodos";
             this.dgvNodos.ReadOnly = true;
@@ -150,7 +180,7 @@
             this.dgvNodos.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvNodos.RowTemplate.Height = 24;
             this.dgvNodos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvNodos.Size = new System.Drawing.Size(853, 355);
+            this.dgvNodos.Size = new System.Drawing.Size(894, 355);
             this.dgvNodos.TabIndex = 9;
             this.dgvNodos.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvNodos_CellMouseClick);
             // 
@@ -214,10 +244,10 @@
             this.btnCargar.IdleFillColor = System.Drawing.Color.White;
             this.btnCargar.IdleForecolor = System.Drawing.Color.DarkOrange;
             this.btnCargar.IdleLineColor = System.Drawing.Color.DarkOrange;
-            this.btnCargar.Location = new System.Drawing.Point(763, 463);
+            this.btnCargar.Location = new System.Drawing.Point(622, 465);
             this.btnCargar.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnCargar.Name = "btnCargar";
-            this.btnCargar.Size = new System.Drawing.Size(200, 60);
+            this.btnCargar.Size = new System.Drawing.Size(200, 61);
             this.btnCargar.TabIndex = 4;
             this.btnCargar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnCargar.Click += new System.EventHandler(this.btnCargar_Click);
@@ -303,6 +333,8 @@
             this.Text = "Dashboard";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbDetener)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbIniciar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNodos)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -328,5 +360,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Mascara;
         private System.Windows.Forms.DataGridViewImageColumn Estado;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.PictureBox ptbDetener;
+        private System.Windows.Forms.PictureBox ptbIniciar;
     }
 }

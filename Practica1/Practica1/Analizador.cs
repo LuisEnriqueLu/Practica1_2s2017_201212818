@@ -63,6 +63,7 @@ namespace Practica1
                         }
                         else if (cadenaconcatenar.Equals(',')) 
                         {
+                            Globales.ipCambiar = ipcambiar;                        
                             estadoprincipal = 2;
                         }                        
                         break;
@@ -212,7 +213,7 @@ namespace Practica1
                         {
                             if (ip != "" || mensaje != "")
                             {
-                                AdminMensajes.AgregaraCola(ip, mensaje);
+                                EnviarMensajes.AgregarDatosCola(ip, mensaje);
                                 ip = "";
                                 mensaje = "";
                             }
@@ -242,7 +243,7 @@ namespace Practica1
                         {
                             if (ip != "" || mensaje != "")
                             {
-                                AdminMensajes.AgregaraCola(ip, mensaje);
+                                EnviarMensajes.AgregarDatosCola(ip, mensaje);
                                 ip = "";
                                 mensaje = "";
                             }

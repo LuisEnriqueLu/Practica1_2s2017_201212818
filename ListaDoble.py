@@ -1,13 +1,13 @@
-from NodoL import NodoL
+from NodoLD import NodoLD
 
-class Lista:
-	def __init__(self):#constructor
+class ListaDoble:
+	def __init__(self): #constructor
 		self.raiz = None
 		self.indiceLista = 0
 
-	def insertar(self, carnet, ip, estado, mascara):
-		if self.raiz == None:			
-			nodo = NodoL(carnet, ip, estado, mascara, self.indiceLista)
+	def insertar(self, carnet, ip, inorden, postorden, resultado):		
+		if self.raiz == None:						
+			nodo = NodoLD(carnet, ip, inorden, postorden, resultado, self.indiceLista)
 			self.raiz = nodo
 			self.indiceLista = self.indiceLista + 1
 		else :
@@ -15,7 +15,7 @@ class Lista:
 			while aux.siguiente != None:
 				aux = aux.siguiente				
 			
-			nodo = NodoL(carnet, ip, estado, mascara, self.indiceLista)
+			nodo = NodoLD(carnet, ip, inorden, postorden, resultado, self.indiceLista)
 			self.indiceLista = self.indiceLista + 1
 			aux.siguiente = nodo
 				
@@ -28,26 +28,12 @@ class Lista:
 		else :
 			while aux != None:
 				if aux.index != None:
-					dato += aux.carnet + " " + aux.ip + " " + aux.estado + "; "										
+					dato += aux.carnet + "," + aux.ip + "," + aux.inorden + "," + aux.postorden + "," + aux.resultado + ";"										
 				aux = aux.siguiente
 			return str(dato) 
-	
-	def consultarCarnet(self, ip):
-		aux = self.raiz
-		dato = ""
-		if aux == None:			
-			return "LISTA VACIA"			
-		else :
-			while aux != None:
-				if aux.index != None:
-					if aux.ip == str(ip):
-						dato = str(aux.carnet)
-						return str(dato)
-				aux = aux.siguiente
-			 	
 			
 	
-	def ActualizarDatos(self, carnet, ip, estado):
+	def ActualizarDatos(self, carnet, ip, inorden):
 		aux = self.raiz
 		dato = ""
 		if aux == None:			
@@ -57,7 +43,7 @@ class Lista:
 				if aux.index != None:
 					if aux.ip == str(ip):
 						aux.carnet = str(carnet)
-						aux.estado = str(estado)
+						aux.inorden = str(inorden)
 				aux = aux.siguiente
 			return "Dato Actualizado" 			
 			

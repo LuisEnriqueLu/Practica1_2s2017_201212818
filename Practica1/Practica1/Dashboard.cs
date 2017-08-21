@@ -17,7 +17,7 @@ namespace Practica1
 {
     public partial class Dashboard : Form
     {
-        static List<NodoListaSimple> ListaSimple;
+        public static List<NodoListaSimple> ListaSimple;
         static int ContadorNodosListaSimple;
         public Dashboard()
         {
@@ -46,6 +46,7 @@ namespace Practica1
             abrirArchivoJSON();
             EnviarDatosListaSimple();
             ConsultarListaSimple();
+            //CambiarIpComputadora(Globales.ipCambiar, "255.0.0.0");
             timer1.Start();
         }
 
@@ -64,8 +65,7 @@ namespace Practica1
             else
             {
                 MessageBox.Show("Hubo un Error al Abrir el Archivo", "EDD", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
+            }            
             MostrarListaSimpleGridView();            
         }        
 
@@ -129,7 +129,7 @@ namespace Practica1
                             variablesEnviar["estado"] = "No";
                         }
 
-                        var respuestaMetodo = cliente.UploadValues("http://192.168.0.6:5000/AgregarIPCarnetListaSimple", variablesEnviar);
+                        var respuestaMetodo = cliente.UploadValues("http://127.0.0.1:5000/AgregarIPCarnetListaSimple", variablesEnviar);
                         var respuestaConvertidaString = Encoding.Default.GetString(respuestaMetodo);
                         Console.WriteLine(respuestaConvertidaString);
                     }
@@ -141,13 +141,47 @@ namespace Practica1
             }
         }
 
+        public void ActualizarListaSimple()
+        {
+            try
+            {
+                foreach (var nod in ListaSimple)
+                {
+                    using (var cliente = new WebClient())
+                    {
+                        var variablesEnviar = new NameValueCollection();
+                        variablesEnviar["carnet"] = nod.carnet;
+                        variablesEnviar["ip"] = nod.ip;
+                        variablesEnviar["mascara"] = nod.mascara;
+                        if (nod.carnet != "" && nod.carnet != "Vacio")
+                        {
+                            variablesEnviar["estado"] = "Si";
+                        }
+                        else
+                        {
+                            variablesEnviar["estado"] = "No";
+                        }
+
+                        var respuestaMetodo = cliente.UploadValues("http://127.0.0.1:5000/ActualizarCarnetListaSimple", variablesEnviar);
+                        var respuestaConvertidaString = Encoding.Default.GetString(respuestaMetodo);
+                        Console.WriteLine(respuestaConvertidaString);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+
+
         public string CarnetConectados(string ipCarnet)
         {
             try
             {
                 using (var cliente = new WebClient())
                 {
-                    var respuestaConvertidaString = cliente.DownloadString("http://192.168.0.6:5000/conectado");
+                    var respuestaConvertidaString = cliente.DownloadString("http://127.0.0.1:5000/conectado");
                     Console.WriteLine("Carnet Conectado: " + respuestaConvertidaString);
                     return respuestaConvertidaString;
                 }
@@ -165,7 +199,7 @@ namespace Practica1
             {
                 using (var cliente = new WebClient())
                 {
-                    var respuestaConvertidaString = cliente.DownloadString("http://192.168.0.6:5000/consultarListaSimple");
+                    var respuestaConvertidaString = cliente.DownloadString("http://127.0.0.1:5000/consultarListaSimple");
                     Console.WriteLine(respuestaConvertidaString);                    
                 }
             }
@@ -263,9 +297,21 @@ namespace Practica1
         private void timer1_Tick(object sender, EventArgs e)
         {
             RecargarDatos(CargarIpConectadas());
-            EnviarDatosListaSimple();
+            ActualizarListaSimple();
             ConsultarListaSimple();
             Console.WriteLine("Cada 20 Segundos");
+        }
+
+        private void ptbDetener_Click(object sender, EventArgs e)
+        {
+            timer1.Stop();
+            Console.WriteLine("Timer Detenido");
+        }
+
+        private void ptbIniciar_Click(object sender, EventArgs e)
+        {
+            timer1.Start();
+            Console.WriteLine("Timer Reiniciado");
         }      
     }    
 
@@ -278,4 +324,3 @@ namespace Practica1
         public int id { get; set; }
     }    
 }
-

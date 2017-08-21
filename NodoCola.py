@@ -1,15 +1,5 @@
-class NodoCola:
-    def __init__(self, dato):
-        self.Dato = dato
-        self.Sig = None
-        
-    def RomperEnlaceSigC(self):
-        self.Sig = None
-    
-    
-    def getDato(self):
-        return self.Dato
-    
-    
-    def setDato(self, dato):
-        self.Dato = dato  
+class NodoCola():
+    def __init__ (self, mensaje=None, ip=None, siguiente=None):
+        self.mensaje = mensaje
+        self.ip = ip
+        self.siguiente = siguiente
